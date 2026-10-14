@@ -4,6 +4,12 @@
     "File"
   ],
   "humanwgs_singleton.fail_reads": "Array[File]? (optional)",
+  "humanwgs_singleton.use_alignment_chunking": true,
+  "humanwgs_singleton.use_gpu": false,
+  "humanwgs_singleton.use_parabricks_deepvariant": false,
   "humanwgs_singleton.backend": "GCP",
-  "humanwgs_singleton.zones": "String"
+  "humanwgs_singleton.zones": "String",
+  "humanwgs_singleton.cpuPlatform": "Intel Cascade Lake",
+  "humanwgs_singleton.gpuType": null,
+  "humanwgs_singleton.preemptible": true
 }

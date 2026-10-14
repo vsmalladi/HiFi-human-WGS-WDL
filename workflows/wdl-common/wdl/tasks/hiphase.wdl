@@ -227,7 +227,7 @@ task hiphase {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} HDD"
+    disks: "local-disk ~{disk_size} SDD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
