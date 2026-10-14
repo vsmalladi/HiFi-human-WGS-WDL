@@ -213,7 +213,7 @@ task bcftools_stats_roh_small_variants {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -313,7 +313,7 @@ task split_vcf_by_sample {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -404,7 +404,7 @@ task bcftools_merge {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -671,7 +671,7 @@ task sv_stats {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -757,7 +757,7 @@ task bcftools_rename {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones

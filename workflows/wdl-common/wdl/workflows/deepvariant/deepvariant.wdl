@@ -319,7 +319,7 @@ task deepvariant_make_examples {
     cpu: tasks_per_shard * threads_per_task
     memory: "~{tasks_per_shard * mem_gb_per_task} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -408,7 +408,7 @@ task deepvariant_call_variants_cpu {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -498,7 +498,7 @@ task deepvariant_call_variants_gpu {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     bootDiskSizeGb: 30  # !UnknownRuntimeKey
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
@@ -670,7 +670,7 @@ task deepvariant_postprocess_variants {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones

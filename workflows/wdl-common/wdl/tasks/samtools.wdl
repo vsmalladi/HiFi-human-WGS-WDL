@@ -75,7 +75,7 @@ task samtools_merge {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -152,7 +152,7 @@ task samtools_fasta {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -244,7 +244,7 @@ task subset_reference {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -355,7 +355,7 @@ task subset_bam {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
@@ -434,7 +434,7 @@ task samtools_reset {
     cpu: threads
     memory: "~{mem_gb} GiB"
     disk: "~{disk_size} GB"
-    disks: "local-disk ~{disk_size} SDD"
+    disks: "local-disk ~{disk_size} SSD"
     preemptible: runtime_attributes.preemptible_tries
     maxRetries: runtime_attributes.max_retries
     zones: runtime_attributes.zones
