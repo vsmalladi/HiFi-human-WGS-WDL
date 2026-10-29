@@ -615,6 +615,12 @@ workflow humanwgs_family {
       hidden: true,
       group: "Resource"
     }
+    gpuMachineType: {
+      name: "GPU machine type",
+      description: "GCP only: fixed machine type for the GPU task (e.g. g2-standard-8 for L4, a2-highgpu-1g for A100); required for L4/A100/H100, leave blank for N1-attached GPUs (V100)",
+      hidden: true,
+      group: "Resource"
+    }
     container_registry: {
       name: "Container registry",
       description: "Container registry where workflow images are hosted. If left blank, PacBio's public Quay.io registry will be used. Must be set if backend is set to 'AWS-HealthOmics'",
@@ -650,6 +656,7 @@ workflow humanwgs_family {
     String? zones
     String? cpuPlatform
     String? gpuType
+    String? gpuMachineType
     String? container_registry
     Boolean preemptible = true
     String? debug_version
@@ -660,6 +667,7 @@ workflow humanwgs_family {
     zones = zones,
     cpuPlatform = cpuPlatform,
     gpuType = gpuType,
+    gpuMachineType = gpuMachineType,
     container_registry = container_registry
   }
 

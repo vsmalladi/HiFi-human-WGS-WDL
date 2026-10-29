@@ -35,6 +35,9 @@ workflow backend_configuration {
     gpuType: {
       description: "Type of GPU/Accelerator to use"
     }
+    gpuMachineType: {
+      description: "GCP only: fixed machine type for GPU tasks (e.g. g2-standard-8, a2-highgpu-1g); required for L4/A100/H100, leave unset for N1-attached GPUs"
+    }
     container_registry: {
       description: "Container registry to use"
     }
@@ -45,6 +48,7 @@ workflow backend_configuration {
     String? zones
     String? cpuPlatform
     String? gpuType
+    String? gpuMachineType
     String? container_registry
   }
 
@@ -57,9 +61,11 @@ workflow backend_configuration {
     # preemptible_tries applies to failures due to preemption only
     # max_retries applies to failures due to a nonzero rc
     # gpuCount and gpuType are optional
-    # gpuType: ["nvidia-tesla-k80", "nvidia-tesla-p100", "nvidia-tesla-v100", "nvidia-tesla-p4", "nvidia-tesla-t4",
-    #           "nvidia-tesla-a100", "nvidia-a100-80gb", "nvidia-l4", "nvidia-h100-80gb"]
-    # TODO: Which are compatible with machine type for deepvariant_call_variants?
+    # gpuType: ["nvidia-tesla-v100", "nvidia-tesla-a100", "nvidia-a100-80gb", "nvidia-l4", "nvidia-h100-80gb"]
+    # N1 GPUs (V100) attach to custom N1 machines; leave gpuMachineType unset.
+    # L4, A100 and H100 require a fixed machine type via gpuMachineType, e.g.
+    #   nvidia-l4 -> g2-standard-8, nvidia-tesla-a100 -> a2-highgpu-1g,
+    #   nvidia-a100-80gb -> a2-ultragpu-1g, nvidia-h100-80gb -> a3-highgpu-1g
     RuntimeAttributes gcp_spot_runtime_attributes = object {
       backend: "GCP",
       preemptible_tries: 3,
@@ -73,6 +79,10 @@ workflow backend_configuration {
       ]),
       gpuType: select_first([
         gpuType,
+        ""
+      ]),
+      gpuMachineType: select_first([
+        gpuMachineType,
         ""
       ]),
       container_registry: select_first([
@@ -96,6 +106,10 @@ workflow backend_configuration {
         gpuType,
         ""
       ]),
+      gpuMachineType: select_first([
+        gpuMachineType,
+        ""
+      ]),
       container_registry: select_first([
         container_registry,
         default_container_registry
@@ -115,6 +129,7 @@ workflow backend_configuration {
       zones: "",
       cpuPlatform: "",
       gpuType: "",
+      gpuMachineType: "",
       container_registry: select_first([
         container_registry,
         default_container_registry
@@ -128,6 +143,7 @@ workflow backend_configuration {
       zones: "",
       cpuPlatform: "",
       gpuType: "",
+      gpuMachineType: "",
       container_registry: select_first([
         container_registry,
         default_container_registry
@@ -170,6 +186,7 @@ workflow backend_configuration {
         gpuType,
         ""
       ]),
+      gpuMachineType: "",
       container_registry: select_first([
         container_registry,
         default_container_registry
@@ -189,6 +206,7 @@ workflow backend_configuration {
         gpuType,
         ""
       ]),
+      gpuMachineType: "",
       container_registry: select_first([
         container_registry,
         default_container_registry

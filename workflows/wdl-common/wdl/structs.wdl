@@ -17,6 +17,8 @@ struct RuntimeAttributes {
 
   ## Optional type of GPU/Accelerator to use
   String gpuType
+  ## Optional fixed GCP machine type for GPU tasks (e.g. g2-standard-8, a2-highgpu-1g); required for L4/A100/H100. Empty uses a custom N* machine
+  String gpuMachineType
 
   ## Container registry to use, default is "quay.io/pacbio"
   String container_registry

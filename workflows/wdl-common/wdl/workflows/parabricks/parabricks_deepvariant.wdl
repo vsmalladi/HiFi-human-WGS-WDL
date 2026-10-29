@@ -70,6 +70,11 @@ workflow parabricks_deepvariant {
 
   String docker_image = "nvcr.io/nvidia/clara/clara-parabricks:~{parabricks_version}"
 
+  # Empty gpuMachineType means a custom N1 machine; otherwise pass it to the GCP backend as predefinedMachineType
+  if (default_runtime_attributes.gpuMachineType != "") {
+    String gpu_predefined_machine_type = default_runtime_attributes.gpuMachineType
+  }
+
   call run_parabricks_deepvariant { input:
     sample_id = sample_id,
     aligned_bam = aligned_bam,
@@ -80,6 +85,7 @@ workflow parabricks_deepvariant {
     ref_name = ref_name,
     gvcf_output = gvcf_output,
     docker_image = docker_image,
+    predefined_machine_type = gpu_predefined_machine_type,
     runtime_attributes = default_runtime_attributes
   }
 
@@ -147,6 +153,9 @@ task run_parabricks_deepvariant {
     gpuCount: {
       description: "Number of GPUs to use"
     }
+    predefined_machine_type: {
+      description: "Fixed GCP machine type (e.g. g2-standard-48, a2-highgpu-4g) from the gpuMachineType input; overrides cpu and memory. Required for L4/A100/H100 GPUs."
+    }
     runtime_attributes: {
       description: "Runtime attribute structure"
     }
@@ -165,6 +174,7 @@ task run_parabricks_deepvariant {
     Int threads = 48
     Int mem_gb = 192
     Int gpuCount = 4
+    String? predefined_machine_type
     RuntimeAttributes runtime_attributes
   }
 
@@ -263,8 +273,11 @@ task run_parabricks_deepvariant {
     maxRetries: runtime_attributes.max_retries
     gpuCount: gpuCount
     gpuType: runtime_attributes.gpuType
+    predefinedMachineType: predefined_machine_type
     zones: runtime_attributes.zones
-    cpuPlatform: runtime_attributes.cpuPlatform
+    # AWS HealthOmics
+    acceleratorCount: gpuCount
+    acceleratorType: runtime_attributes.gpuType
   }
 }
 

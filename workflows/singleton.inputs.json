@@ -12,6 +12,7 @@
   "humanwgs_singleton.zones": null,
   "humanwgs_singleton.cpuPlatform": null,
   "humanwgs_singleton.gpuType": null,
+  "humanwgs_singleton.gpuMachineType": null,
   "humanwgs_singleton.container_registry": null,
   "humanwgs_singleton.preemptible": true,
   "humanwgs_singleton.debug_version": null

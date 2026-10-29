@@ -11,6 +11,7 @@
   "humanwgs_family.zones": null,
   "humanwgs_family.cpuPlatform": null,
   "humanwgs_family.gpuType": null,
+  "humanwgs_family.gpuMachineType": null,
   "humanwgs_family.container_registry": null,
   "humanwgs_family.preemptible": true,
   "humanwgs_family.debug_version": null

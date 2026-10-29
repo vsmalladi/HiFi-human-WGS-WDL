@@ -11,5 +11,6 @@
   "humanwgs_singleton.zones": "String",
   "humanwgs_singleton.cpuPlatform": "Intel Cascade Lake",
   "humanwgs_singleton.gpuType": null,
+  "humanwgs_singleton.gpuMachineType": null,
   "humanwgs_singleton.preemptible": true
 }

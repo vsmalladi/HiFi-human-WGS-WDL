@@ -121,6 +121,11 @@ workflow deepvariant {
     }
   }
 
+  # Empty gpuMachineType means a custom N1 machine; otherwise pass it to the GCP backend as predefinedMachineType
+  if (default_runtime_attributes.gpuMachineType != "") {
+    String gpu_predefined_machine_type = default_runtime_attributes.gpuMachineType
+  }
+
   if (gpu) {
     call deepvariant_call_variants_gpu { input:
       sample_id = sample_id,
@@ -128,6 +133,7 @@ workflow deepvariant {
       example_tfrecord_tars = deepvariant_make_examples.example_tfrecord_tar,
       total_deepvariant_tasks = total_deepvariant_tasks,
       docker_image = docker_image + "-gpu",
+      predefined_machine_type = gpu_predefined_machine_type,
       runtime_attributes = default_runtime_attributes
     }
   }
@@ -451,6 +457,9 @@ task deepvariant_call_variants_gpu {
     mem_gb: {
       description: "Memory to use in GiB."
     }
+    predefined_machine_type: {
+      description: "Fixed GCP machine type (e.g. a2-highgpu-1g) from the gpuMachineType input; overrides cpu and memory. Required for L4/A100/H100 GPUs."
+    }
     runtime_attributes: {
       description: "Runtime attribute structure"
     }
@@ -465,6 +474,7 @@ task deepvariant_call_variants_gpu {
     Int threads = 8
     Int writer_threads = 4
     Int mem_gb = 44
+    String? predefined_machine_type
     RuntimeAttributes runtime_attributes
   }
 
@@ -504,8 +514,11 @@ task deepvariant_call_variants_gpu {
     maxRetries: runtime_attributes.max_retries
     gpuCount: gpuCount
     gpuType: runtime_attributes.gpuType
+    predefinedMachineType: predefined_machine_type
     zones: runtime_attributes.zones
-    cpuPlatform: runtime_attributes.cpuPlatform
+    # AWS HealthOmics
+    acceleratorCount: gpuCount
+    acceleratorType: runtime_attributes.gpuType
   }
 }
 
